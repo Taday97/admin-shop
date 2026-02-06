@@ -5,7 +5,7 @@ import { getProductImageAction } from './get-product-image.action';
 export const getProductsActions = async (page: number = 1, limit: number = 10) => {
   try {
     const { data } = await testoApi.get<Product[]>(
-      `/products?limit=${limit}&offset=${page * limit}`,
+      `/products?limit=${limit}&offset=${(page-1) * limit}`,
     );
 
     console.log(data);

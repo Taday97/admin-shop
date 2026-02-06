@@ -3,12 +3,11 @@
         <a href="#">
             <div class="relative flex items-end overflow-hidden rounded-xl">
                 <img class="h-[230px] object-cover" :src="product.images[0]"
-                    :alt="product.title" />
+                    :alt="product.name" />
             </div>
 
             <div class="mt-1 p-2">
-                <h2 class="text-slate-700">{{product.title}}</h2>
-                <p class="mt-1 text-sm text-slate-400 capitalize">{{ product.gender }}</p>
+                <h2 class="text-slate-700">{{product.name}}</h2>
 
                 <div class="mt-3 flex items-end justify-between">
                     <p class="text-lg font-bold text-blue-500">${{product.price}}</p>

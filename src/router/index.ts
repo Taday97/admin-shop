@@ -1,3 +1,5 @@
+import AuthLayout from '@/modules/auth/layouts/AuthLayout.vue';
+import routersAdmin from '@/modules/auth/routes';
 import ShopLayout from '@/modules/shop/layout/ShopLayout.vue';
 import { createRouter, createWebHistory } from 'vue-router';
 
@@ -8,12 +10,21 @@ const router = createRouter({
       path: '/',
       name: 'shop',
       component: ShopLayout,
-      children:[{
-        path:'',
-        name:'home',
-        component:()=>import('@/modules/shop/views/HomeView.vue')
-      }]
+      children: [
+        {
+          path: '',
+          name: 'home',
+          component: () => import('@/modules/shop/views/HomeView.vue'),
+        },
+      ],
     },
+    {
+      path: '/',
+      name: 'login',
+      component: AuthLayout,
+      children: routersAdmin,
+    },
+
     /* {
       path: '/',
       name: 'home',

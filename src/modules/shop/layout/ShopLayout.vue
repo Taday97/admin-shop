@@ -12,9 +12,6 @@ import HomeView from '../views/HomeView.vue';
     <!-- Header Navbar -->
     <TopMenu></TopMenu>
 
-
-
-
     <!-- Tab Menu and Product List -->
     <RouterView></RouterView>
 
