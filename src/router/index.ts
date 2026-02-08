@@ -1,5 +1,7 @@
+
+import { adminRoutes } from '@/modules/admin/routes';
 import AuthLayout from '@/modules/auth/layouts/AuthLayout.vue';
-import routersAdmin from '@/modules/auth/routes';
+import { authRoutes } from '@/modules/auth/routes';
 import ShopLayout from '@/modules/shop/layout/ShopLayout.vue';
 import { createRouter, createWebHistory } from 'vue-router';
 
@@ -18,26 +20,12 @@ const router = createRouter({
         },
       ],
     },
-    {
-      path: '/',
-      name: 'login',
-      component: AuthLayout,
-      children: routersAdmin,
-    },
+    // Auth Routers
+    authRoutes,
+    // Admin Routers
+    adminRoutes
 
-    /* {
-      path: '/',
-      name: 'home',
-      component: HomeView,
-    },
-    {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/AboutView.vue'),
-    }, */
+   
   ],
 });
 

@@ -1,18 +1,22 @@
 import { type RouteRecordRaw } from 'vue-router';
-import RegisterPage from '../pages/RegisterPage.vue';
-import LoginPage from '../pages/LoginPage.vue';
+import isNotAuthenticatedGuard from '../guards/is-notAuthenticated.guard';
 
-const routersAdmin: RouteRecordRaw[] = [
-  {
-    path: '/register',
-    name: 'register',
-    component: RegisterPage,
-  },
-  {
-    path: '/login',
-    name: 'a',
-    component: LoginPage,
-  },
-];
-
-export default routersAdmin;
+export const authRoutes: RouteRecordRaw = {
+  path: '/auth',
+  name: 'auth',
+  beforeEnter:[isNotAuthenticatedGuard],
+  redirect: { name: 'login' },
+  component: () => import('@/modules/auth/layouts/AuthLayout.vue'),
+  children: [
+    {
+      path: 'login',
+      name: 'login',
+      component: () => import('@/modules/auth/views/LoginView.vue'),
+    },
+    {
+      path: 'register',
+      name: 'register',
+      component: () => import('@/modules/auth/views/RegisterView.vue'),
+    },
+  ],
+};

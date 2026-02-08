@@ -1,10 +1,10 @@
-import { testoApi } from '@/api/tesloApi';
+import { tesloApi } from '@/api/tesloApi';
 import type { Product } from '../interfaces/product.interface';
 import { getProductImageAction } from './get-product-image.action';
 
 export const getProductsActions = async (page: number = 1, limit: number = 10) => {
   try {
-    const { data } = await testoApi.get<Product[]>(
+    const { data } = await tesloApi.get<Product[]>(
       `/products?limit=${limit}&offset=${(page-1) * limit}`,
     );
 

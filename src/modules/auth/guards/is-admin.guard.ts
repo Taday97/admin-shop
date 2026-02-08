@@ -1,19 +1,17 @@
 import type { NavigationGuardNext, RouteLocationNormalized } from 'vue-router';
-
-import { AuthStatus } from '../interfaces';
 import { useAuthStore } from '../store/auth.store';
 
-const isAuthenticatedGuard = async (
+
+const isAdminGuard = async (
   to: RouteLocationNormalized,
   from: RouteLocationNormalized,
   next: NavigationGuardNext,
 ) => {
   const authStore = useAuthStore();
 
-  // console.log(to);
   await authStore.checkAuthStatus();
 
-  authStore.authStatus === AuthStatus.UnAuthenticated ? next({ name: 'home' }) : next();
+  authStore.isAdmin ? next() : next({ name: 'home' });
 };
 
-export default isAuthenticatedGuard;
+export default isAdminGuard;
