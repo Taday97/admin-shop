@@ -3,31 +3,21 @@ import { useAuthStore } from '../../auth/store/auth.store';
   <!-- Header Navbar -->
   <nav class="fixed top-0 left-0 z-20 w-full border-b border-gray-200 bg-white py-2.5 px-6 sm:px-4">
     <div class="container mx-auto flex max-w-6xl flex-wrap items-center justify-between">
-       <!-- Title  -->
-       <RouterLink to="/" class="flex items-center">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          class="mr-3 h-6 text-blue-500 sm:h-9"
+      <!-- Title  -->
+      <RouterLink to="/" class="flex items-center">
+        <!-- Logo como imagen -->
+        <span
+          class="text-2xl sm:text-3xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400"
         >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"
-          />
-        </svg>
-
-        <span class="self-center whitespace-nowrap text-xl font-semibold">Termcode</span>
+          SkillBridge
+        </span>
       </RouterLink>
 
       <div class="mt-2 sm:mt-0 sm:flex items-center md:order-2">
         <!-- Warenkorb Button -->
-        <RouterLink to="/cart"
-           
-          class="mr-3 hidden md:inline-flex items-center gap-3 py-1.5 px-6 text-center text-sm font-medium text-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300"
+        <RouterLink
+          to="/cart"
+          class="mr-3 hidden md:inline-flex items-center gap-3 py-1.5 px-6 text-center text-sm font-medium text-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-300"
           data-test="cart"
         >
           <div class="relative" style="width: 24px; height: 24px">
@@ -46,14 +36,17 @@ import { useAuthStore } from '../../auth/store/auth.store';
             </svg>
             <div
               class="absolute inline-flex items-center justify-center w-6 h-6 text-[10px] font-normal text-white bg-red-500 border-2 border-white rounded-full -top-3 -right-3"
-              data-test="cart-count">
-              {{productStore.quantityCard}}
+              data-test="cart-count"
+            >
+              {{ productStore.quantityCard }}
             </div>
           </div>
           <div class="flex space-x-1 items-center justify-start">
             <div class="inline-flex flex-col space-y-0.5 items-start justify-start">
               <p class="text-xs font-medium">Mein Warenkorb</p>
-              <p class="text-xs font-semibold text-orange-500" data-test="cart-amount"> {{productStore.totalPrice}} €</p>
+              <p class="text-xs font-semibold text-orange-500" data-test="cart-amount">
+                {{ productStore.totalPrice }} €
+              </p>
             </div>
           </div>
         </RouterLink>
@@ -62,7 +55,7 @@ import { useAuthStore } from '../../auth/store/auth.store';
           <RouterLink
             to="auth/login"
             type="button"
-            class="rounde mr-3 hidden border border-blue-700 py-1.5 px-6 text-center text-sm font-medium text-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300 md:inline-block rounded-lg"
+            class="rounde mr-3 hidden border border-blue-500 py-1.5 px-6 text-center text-sm font-medium text-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-300 md:inline-block rounded-lg"
           >
             Anmelden</RouterLink
           >
@@ -70,7 +63,7 @@ import { useAuthStore } from '../../auth/store/auth.store';
           <RouterLink
             to="auth/register"
             type="button"
-            class="rounde mr-3 hidden bg-blue-700 py-1.5 px-6 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 md:mr-0 md:inline-block rounded-lg"
+            class="rounde mr-3 hidden bg-blue-500 py-1.5 px-6 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 md:mr-0 md:inline-block rounded-lg"
           >
             Registrieren</RouterLink
           >
@@ -99,14 +92,14 @@ import { useAuthStore } from '../../auth/store/auth.store';
         </template>
         <template v-if="authStore.isAuthenticated">
           <!-- Login Button -->
- <!--          <RouterLink
+          <RouterLink
             v-if="authStore.isAdmin"
             to="/admin"
             type="button"
-            class="rounde mr-3 hidden border border-blue-700 py-1.5 px-6 text-center text-sm font-medium text-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300 md:inline-block rounded-lg"
+            class="rounde mr-3 hidden border border-blue-500 py-1.5 px-6 text-center text-sm font-medium text-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-300 md:inline-block rounded-lg"
           >
             Administrator</RouterLink
-          > -->
+          >
           <button
             @click="authStore.logout()"
             type="button"

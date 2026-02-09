@@ -1,10 +1,12 @@
 <template>
   <div class="justify-between mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start">
-    <img
-      :src="productItem.product.images[0]"
-      :alt="productItem.product.name"
-      class="w-full rounded-lg sm:w-40"
-    />
+    <div class="w-32 h-32 sm:w-40 sm:h-40 flex-shrink-0 overflow-hidden rounded-lg">
+      <img
+        :src="productItem.product.images[0]"
+        :alt="productItem.product.name"
+        class="w-full h-full object-cover"
+      />
+    </div>
     <div class="sm:ml-4 sm:flex sm:w-full sm:justify-between">
       <div class="mt-5 sm:mt-0">
         <h2 class="text-lg font-bold text-gray-900">{{ productItem.product.name }}</h2>

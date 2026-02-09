@@ -1,6 +1,6 @@
 <template>
   <div class="min-h-screen bg-gray-100 py-16">
-    <h1 class="mb-10 mt-5 text-center text-2xl font-bold">Checkout</h1>
+    <h1 class="mb-10 mt-5 text-center text-2xl font-bold">Kasse</h1>
     <div
       class="container mx-auto px-4 md:px-6 lg:px-0 flex flex-col md:flex-row gap-8 justify-center"
     >

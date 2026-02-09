@@ -1,16 +1,18 @@
 <template>
-  <!-- Title -->
+  <div class="min-h-screen bg-gray-100 py-16">
+    <!-- Title -->
 
-  <div v-if="!produts" class="pt-50">
-    <h1 class="text-center h-[500x]">Loading Products</h1>
-    <p>Wait a moment, please!</p>
+    <div v-if="!produts" class="pt-50">
+      <h1 class="text-center h-[500x]">Loading Products</h1>
+      <p>Wait a moment, please!</p>
+    </div>
+
+    <!-- Product List -->
+
+    <ProductList v-else :products="produts"></ProductList>
+    <ButtonPagination :has-more-data="!!produts && produts.length < 10" :page="page">
+    </ButtonPagination>
   </div>
-
-  <!-- Product List -->
-   
-  <ProductList v-else :products="produts"></ProductList>
-  <ButtonPagination :has-more-data="!!produts && produts.length < 10" :page="page">
-  </ButtonPagination>
 </template>
 
 <script lang="ts" setup>
