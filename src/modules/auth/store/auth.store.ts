@@ -29,9 +29,9 @@ export const useAuthStore = defineStore('auth', () => {
       return logout();
     }
   };
-  const register = async (fullName: string, email: string, password: string) => {
+  const register = async (name: string, email: string, password: string) => {
     try {
-      const registerResp = await registerAction(fullName, email, password);
+      const registerResp = await registerAction(name, email, password);
       if (!registerResp.ok) {
         logout();
         return { ok: false, message: registerResp.message };
@@ -84,7 +84,7 @@ export const useAuthStore = defineStore('auth', () => {
     isAdmin: computed(() => {
     return  user.value?.roles.includes('admin') ?? false;
     }),
-    userName: computed(() => user.value?.fullName),
+    userName: computed(() => user.value?.name),
 
     //Actions
     logout,

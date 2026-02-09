@@ -13,12 +13,12 @@ import { isAxiosError } from 'axios';
   token: string;
 }
 
-export const registerAction = async (fullName: string, email: string, password: string): Promise<RegisterError | RegisterSuccess> => {
+export const registerAction = async (name: string, email: string, password: string): Promise<RegisterError | RegisterSuccess> => {
   try {
     const { data } = await tesloApi.post<AuthResponse>('/auth/register', {
       email,
       password,
-      fullName
+      name
     });
     return {
       ok: true,

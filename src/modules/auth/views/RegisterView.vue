@@ -1,10 +1,10 @@
 <template>
   <h1 class="text-2xl font-semibold mb-4">Registrieren</h1>
   <form @submit.prevent="onRegister">
-    <!-- UserfullName Input -->
+    <!-- Username Input -->
     <div class="mb-4">
-      <label for="fullName" class="block text-gray-600">Benutzername</label>
-      <input ref="nameInputRef" v-model="myForm.fullName" type="text" id="name" name="name"
+      <label for="name" class="block text-gray-600">Benutzername</label>
+      <input ref="nameInputRef" v-model="myForm.name" type="text" id="name" name="name"
         class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
         autocomplete="off" />
     </div>
@@ -43,19 +43,19 @@ import { useAuthStore } from '../store/auth.store';
 import { useToast } from 'vue-toastification';
 
 const authStore = useAuthStore();
-const fullNameInputRef = ref<HTMLInputElement | null>(null);
+const nameInputRef = ref<HTMLInputElement | null>(null);
 const emailInputRef = ref<HTMLInputElement | null>(null);
 const passwordInputRef = ref<HTMLInputElement | null>(null);
 const toast = useToast();
 const myForm = reactive({
-  fullName: '',
+  name: '',
   email: '',
   password: '',
 })
 const onRegister = async () => {
 
-  if (myForm.fullName === '') {
-    return fullNameInputRef.value?.focus();
+  if (myForm.name === '') {
+    return nameInputRef.value?.focus();
   }
   if (myForm.email === '') {
     return emailInputRef.value?.focus();
@@ -64,7 +64,7 @@ const onRegister = async () => {
     return passwordInputRef.value?.focus();
   }
 
-  const { ok, message } = await authStore.register(myForm.fullName, myForm.email, myForm.password);
+  const { ok, message } = await authStore.register(myForm.name, myForm.email, myForm.password);
 
   if (ok) {
     return

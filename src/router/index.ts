@@ -18,6 +18,16 @@ const router = createRouter({
           name: 'home',
           component: () => import('@/modules/shop/views/HomeView.vue'),
         },
+        {
+          path: '/cart',
+          name: 'cart',
+          component: () => import('@/modules/shop/views/CartView.vue'),
+        },
+        {
+          path: '/checkout',
+          name: 'checkout',
+          component: () => import('@/modules/shop/views/CheckoutView.vue'),
+        },
       ],
     },
     // Auth Routers

@@ -10,6 +10,10 @@ export interface Product {
     stock:       number;
     category:    Category;
 }
+export interface ProductItem {
+    quantity: number;
+    product:    Product;
+}
 
 export interface Category {
     id:          number;

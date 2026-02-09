@@ -56,7 +56,7 @@ const onLogin = async () => {
   if (myForm.email === '') {
     return emailInputRef.value?.focus();
   }
-  if (myForm.password.length < 6) {
+  if (myForm.password.length < 3) {
     return passwordInputRef.value?.focus();
   }
   if (myForm.rememberMe) {
