@@ -6,11 +6,16 @@ import { useAuthStore } from '../../auth/store/auth.store';
       <!-- Title  -->
       <RouterLink to="/" class="flex items-center">
         <!-- Logo como imagen -->
-        <span
-          class="text-2xl sm:text-3xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400"
-        >
-          SkillBridge
-        </span>
+        <div class="flex flex-col leading-tight">
+          <span
+            class="text-2xl sm:text-3xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-blue-500"
+          >
+            SkillBridge
+          </span>
+          <span class="text-xs sm:text-sm text-gray-500">
+            IT-Weiterbildung & digitale Kompetenzen
+          </span>
+        </div>
       </RouterLink>
 
       <div class="mt-2 sm:mt-0 sm:flex items-center md:order-2">

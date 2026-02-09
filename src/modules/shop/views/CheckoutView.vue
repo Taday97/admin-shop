@@ -76,7 +76,7 @@
           <div>
             <label class="flex items-center cursor-pointer mb-4">
               <input type="radio" name="payment" class="form-radio h-5 w-5 text-indigo-500" />
-              <img src="../../../assets/logo-stripe.png" class="h-10 ml-3" />
+              <img src="../../../assets/payment_methods.webp" class="h-10 ml-3" />
             </label>
 
             <div class="space-y-3">
