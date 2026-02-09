@@ -11,10 +11,10 @@
         <h2 class="text-slate-700 h-[50px]">{{ product.name }}</h2>
 
         <div class="mt-3 flex items-end justify-between">
-          <p class="text-lg font-bold text-blue-500">${{ product.price }}</p>
+          <p class="text-lg font-bold text-blue-700">${{ product.price }}</p>
 
           <div
-            class="flex items-center space-x-1.5 rounded-lg bg-blue-500 px-4 py-1.5 text-white duration-100 hover:bg-blue-600"
+            class="flex items-center space-x-1.5 rounded-lg bg-blue-700 px-4 py-1.5 text-white duration-100 hover:bg-blue-600"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
