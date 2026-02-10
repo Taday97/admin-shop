@@ -4,6 +4,7 @@ import { AuthStatus, type User } from '../interfaces';
 import { checkAuthAction, loginAction } from '../actions';
 import { useLocalStorage } from '@vueuse/core';
 import { registerAction } from '../actions/register.action';
+import type { AxiosError } from 'axios';
 
 export const useAuthStore = defineStore('auth', () => {
   //Authenticated, unAuthenticated, Checking
@@ -41,14 +42,14 @@ export const useAuthStore = defineStore('auth', () => {
       token.value = registerResp.token;
       authStatus.value = AuthStatus.Authenticated;
       return { ok: true, message: 'Der Benutzer wurde erfolgreich erstellt' };
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
 
-      return { ok: false, message: '' };
+      return { ok: false, message: error.response.data.error };
     }
   };
   const logout = () => {
-    localStorage.removeItem('token')
+    localStorage.removeItem('token');
 
     authStatus.value = AuthStatus.UnAuthenticated;
     user.value = undefined;
@@ -82,7 +83,7 @@ export const useAuthStore = defineStore('auth', () => {
     isChecking: computed(() => authStatus.value === AuthStatus.Checking),
     isAuthenticated: computed(() => authStatus.value === AuthStatus.Authenticated),
     isAdmin: computed(() => {
-    return  user.value?.roles.includes('admin') ?? false;
+      return user.value?.roles.includes('admin') ?? false;
     }),
     userName: computed(() => user.value?.name),
 
@@ -91,6 +92,5 @@ export const useAuthStore = defineStore('auth', () => {
     login,
     register,
     checkAuthStatus,
-    
   };
 });

@@ -13,9 +13,7 @@
           <div class="max-w-96">
             <div class="flex items-center gap-4">
               <span class="text-[15px] font-semibold text-slate-600">Bestellung Nr. {{ order.id }}</span>
-              <!-- <span class="px-3 py-1.5 bg-green-100 text-green-900 text-xs font-medium rounded-md"
-                >Delivered</span
-              > -->
+            
             </div>
             <p class="text-slate-600 text-sm mt-3">Aufgegeben am {{ order.orderDate }}</p>
           </div>
@@ -79,7 +77,6 @@ import ButtonPagination from '@/modules/common/components/ButtonPagination.vue';
 import { useRoute } from 'vue-router';
 import { ref, watch, watchEffect } from 'vue';
 import { getOrdersActions } from '../actions/get-orders.actions';
-import { d } from 'vue-router/dist/index-Cu9B0wDz.mjs';
 import { getProductImageAction } from '@/modules/products/actions';
 
 const route = useRoute();

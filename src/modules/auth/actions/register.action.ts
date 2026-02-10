@@ -25,11 +25,11 @@ export const registerAction = async (name: string, email: string, password: stri
       user: data.user,
       token: data.token,
     };
-  } catch (err) {
+  } catch (err:any) {
     console.log(err);
     return {
         ok: false,
-        message: 'Der Benutzer konnte nicht erstellt werden',
+        message: err.response.data.error,
       };
   }
 };

@@ -1,12 +1,12 @@
 <template>
   <div class="w-full">
     <h1 class="text-2xl font-semibold mb-4">Einloggen</h1>
-    <form @submit.prevent="onLogin">
+    <form @submit.prevent="onSubmit">
       <!-- Username Input -->
       <div class="mb-4">
         <label for="email" class="block text-gray-600">Email</label>
         <input
-          v-model="myForm.email"
+          v-model="email"
           ref="emailInputRef"
           type="text"
           id="email"
@@ -15,6 +15,7 @@
           class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
           autocomplete="off"
         />
+        <p v-if="errors.email" class="text-red-500 text-sm mt-1">{{ errors.email }}</p>
       </div>
       <!-- Password Input -->
       <div class="mb-4">
@@ -22,7 +23,7 @@
         <div class="relative">
           <input
             ref="passwordInputRef"
-            v-model="myForm.password"
+            v-model="password"
             :type="showPassword ? 'text' : 'password'"
             id="password"
             name="password"
@@ -30,7 +31,7 @@
             class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
             autocomplete="off"
           />
-
+          <p v-if="errors.email" class="text-red-500 text-sm mt-1">{{ errors.password }}</p>
           <!-- Ojo -->
           <button
             type="button"
@@ -96,7 +97,7 @@
       <!-- Remember Me Checkbox -->
       <div class="mb-4 flex items-center">
         <input
-          v-model="myForm.rememberMe"
+          v-model="rememberMe"
           type="checkbox"
           id="remember"
           name="remember"
@@ -127,47 +128,62 @@
 import { reactive, ref, watch, watchEffect } from 'vue';
 import { useAuthStore } from '../store/auth.store';
 import { useToast } from 'vue-toastification';
+import { useField, useForm } from 'vee-validate';
+import * as yup from 'yup';
 
 const authStore = useAuthStore();
 const emailInputRef = ref<HTMLInputElement | null>(null);
 const passwordInputRef = ref<HTMLInputElement | null>(null);
 const toast = useToast();
 
-const myForm = reactive({
-  email: '',
-  password: '',
-  rememberMe: false,
+// Schema de validación
+const schema = yup.object({
+  email: yup.string().required('Email ist erforderlich').email('Ungültige Email'),
+  password: yup.string().required('Passwort ist erforderlich').min(3, 'Mindestens 3 Zeichen'),
+  rememberMe: yup.boolean(),
 });
 
-const onLogin = async () => {
-  if (myForm.email === '') {
-    return emailInputRef.value?.focus();
-  }
-  if (myForm.password.length < 3) {
-    return passwordInputRef.value?.focus();
-  }
-  if (myForm.rememberMe) {
-    localStorage.setItem('email', myForm.email);
-  } else {
-    localStorage.removeItem('email');
-  }
+// Formulario
+const { handleSubmit, errors } = useForm({
+  validationSchema: schema,
+  initialValues: {
+    email: '',
+    password: '',
+    rememberMe: false,
+  },
+});
 
-  const ok = await authStore.login(myForm.email, myForm.password);
+// Campos individuales
+const { value: email } = useField<string>('email');
+const { value: password } = useField<string>('password');
+const { value: rememberMe } = useField<boolean>('rememberMe');
 
-  if (ok) {
-    return;
-  }
-  toast.error('Benutzername oder Passwort ist falsch');
-  console.log(ok);
-};
-
+// Cargar email guardado
 watchEffect(() => {
-  const email = localStorage.getItem('email');
-  if (email) {
-    myForm.email = email;
-    myForm.rememberMe = true;
-  }
+  const storedEmail = localStorage.getItem('email');
+  if (storedEmail) email.value = storedEmail;
 });
+
+// Login
+const onSubmit = handleSubmit(
+  async (values) => {
+    console.log('Login values:', values);
+    const ok = await authStore.login(values.email, values.password);
+
+    if (!ok) {
+      toast.error('Benutzername oder Passwort ist falsch');
+      return;
+    }
+
+    if (values.rememberMe) localStorage.setItem('email', values.email);
+    else localStorage.removeItem('email');
+
+    toast.success('Erfolgreich eingeloggt!');
+  },
+  (errors) => {
+    console.log('Errores de validación:', errors);
+  },
+);
 
 const showPassword = ref(false);
 const togglePassword = () => {

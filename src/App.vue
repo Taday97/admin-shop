@@ -1,12 +1,15 @@
 <template>
-  <FullScreenLoader v-if="authStore.isChecking"></FullScreenLoader>
-  <!-- Loader Pago -->
-  <FullScreenLoader
-    v-else-if="orderShopStore.isProcessingPayment"
-    message="Zahlung wird verarbeitet… Bitte warten"
-  />
-  <RouterView />
-  <VueQueryDevtools />
+  <div>
+    <FullScreenLoader v-if="authStore.isChecking" />
+
+    <FullScreenLoader
+      v-else-if="orderShopStore.isProcessingPayment"
+      message="Zahlung wird verarbeitet… Bitte warten"
+    />
+
+    <RouterView />
+    <VueQueryDevtools />
+  </div>
 </template>
 
 <script lang="ts" setup>

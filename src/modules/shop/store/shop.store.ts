@@ -19,7 +19,7 @@ export const shopStore = defineStore('order', () => {
       return { ok: true, message: 'Die Zahlung wurde erfolgreich durchgeführt' };
     } catch (error) {
       console.log(error);
-      return { ok: false, message: '' };
+      return { ok: false, message: error };
     }
   };
 

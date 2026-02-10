@@ -53,162 +53,167 @@
 
       <!-- Right: Payment & Billing -->
       <div class="px-3 md:w-5/12">
-        <div
-          class="w-full mx-auto border border-gray-200 p-3 text-gray-800 font-light mb-6 rounded-lg bg-white md:p-8 shadow-md"
-        >
-          <!-- Kontakt Info -->
-          <div class="w-full flex items-center">
-            <div class="px-3">
-              <span class="text-gray-600 font-semibold">Kontakt</span>
-            </div>
-            <div class="flex-grow px-5 pl-3">
-              <span class="text-gray-600">Scott Windon</span>
-            </div>
-          </div>
-
+        <form @submit.prevent="onSubmit">
           <!-- Adresse Form -->
-          <div class="w-full p-3 border-b border-gray-200">
-            <div>
-              <label class="block text-gray-700 text-sm font-medium mt-2" for="name">Name</label>
-              <input
-                id="name"
-                v-model="contactForm.name"
-                placeholder="Name eingeben"
-                class="w-full px-3 py-2 mb-1 border border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors"
-              />
+          <div
+            class="w-full mx-auto border border-gray-200 p-3 text-gray-800 font-light mb-6 rounded-lg bg-white md:p-8 shadow-md"
+          >
+            <h3 class="text-xl font-semibold text-slate-900">Angaben zur Lieferung</h3>
+            <div class="w-full p-3 border-b border-gray-200">
+              <div>
+                <label class="block text-gray-700 text-sm font-medium mt-2" for="name">Name</label>
+                <input
+                  id="name"
+                  v-model="name"
+                  placeholder="Name eingeben"
+                  class="w-full px-3 py-2 mb-1 border border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors"
+                />
+                <span class="text-red-500 text-sm">{{ errors.name }}</span>
 
-              <label class="block text-gray-700 text-sm font-medium mt-2" for="address"
-                >Adresse</label
-              >
-              <input
-                id="address"
-                v-model="contactForm.address"
-                placeholder="Adresse eingeben"
-                class="w-full px-3 py-2 mb-1 border border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors"
-              />
+                <label class="block text-gray-700 text-sm font-medium mt-2" for="address"
+                  >Adresse</label
+                >
+                <input
+                  id="address"
+                  v-model="address"
+                  placeholder="Adresse eingeben"
+                  class="w-full px-3 py-2 mb-1 border border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors"
+                />
+                <span class="text-red-500 text-sm">{{ errors.address }}</span>
 
-              <div class="flex">
-                <div class="flex-grow w-1/4 pr-2">
-                  <label class="block text-gray-700 text-sm font-medium mt-2" for="plz">PLZ</label>
-                  <input
-                    id="plz"
-                    v-model="contactForm.plz"
-                    placeholder="PLZ"
-                    class="w-full px-3 py-2 mb-1 border border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors"
-                  />
-                </div>
-                <div class="flex-grow">
-                  <label class="block text-gray-700 text-sm font-medium mt-2" for="city"
-                    >Stadt</label
-                  >
-                  <input
-                    id="city"
-                    v-model="contactForm.city"
-                    placeholder="Stadt eingeben"
-                    class="w-full px-3 py-2 mb-1 border border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors"
-                  />
+                <div class="flex">
+                  <div class="flex-grow w-1/4 pr-2">
+                    <label class="block text-gray-700 text-sm font-medium mt-2" for="plz"
+                      >PLZ</label
+                    >
+                    <input
+                      id="plz"
+                      v-model="plz"
+                      placeholder="PLZ"
+                      class="w-full px-3 py-2 mb-1 border border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors"
+                    />
+                    <span class="text-red-500 text-sm">{{ errors.plz }}</span>
+                  </div>
+                  <div class="flex-grow">
+                    <label class="block text-gray-700 text-sm font-medium mt-2" for="city"
+                      >Stadt</label
+                    >
+                    <input
+                      id="city"
+                      v-model="city"
+                      placeholder="Stadt eingeben"
+                      class="w-full px-3 py-2 mb-1 border border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors"
+                    />
+                    <span class="text-red-500 text-sm">{{ errors.city }}</span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <!-- Zahlungsinformationen -->
-        <div
-          class="w-full mx-auto rounded-lg bg-white border border-gray-200 text-gray-800 font-light mb-6 p-6 md:p-8 shadow-md"
-        >
-          <form>
-            <h3 class="text-xl font-semibold text-slate-900">Payment Details</h3>
-            <div class="mb-5">
-              <label for="type1" class="flex items-center cursor-pointer">
+          <!-- Zahlungsinformationen -->
+          <div
+            class="w-full mx-auto rounded-lg bg-white border border-gray-200 text-gray-800 font-light mb-6 p-6 md:p-8 shadow-md"
+          >
+            <h3 class="text-xl font-semibold text-slate-900">Zahlungsdetails</h3>
+
+            <div class="flex flex-wrap gap-y-6 gap-x-12 mt-4 mb-8">
+              <div class="flex items-center">
                 <input
                   type="radio"
-                  class="form-radio h-5 w-5 text-indigo-500"
-                  name="type"
-                  id="type1"
-                  checked
+                  name="pay"
+                  class="w-5 h-5 cursor-pointer"
+                  id="card"
+                  value="card"
+                  v-model="type"
                 />
-                <img src="../../../assets/payment_methods.webp" class="h-6 ml-3" />
-              </label>
+                <label for="card" class="ml-4 flex gap-2 cursor-pointer">
+                  <img src="https://readymadeui.com/images/visa.webp" class="w-12" />
+                  <img src="https://readymadeui.com/images/american-express.webp" class="w-12" />
+                  <img src="https://readymadeui.com/images/master.webp" class="w-12" />
+                </label>
+              </div>
+
+              <div class="flex items-center">
+                <input
+                  type="radio"
+                  name="pay"
+                  class="w-5 h-5 cursor-pointer"
+                  id="paypal"
+                  value="paypal"
+                  v-model="type"
+                />
+                <label for="paypal" class="ml-4 flex gap-2 cursor-pointer">
+                  <img src="https://readymadeui.com/images/paypal.webp" class="w-20" />
+                </label>
+              </div>
+              <span class="text-red-500 text-sm">{{ errors.type }}</span>
             </div>
-            <div class="grid gap-6 mt-6">
+
+            <div v-if="type === 'card'" class="grid gap-6 mt-6">
               <div>
                 <label class="block text-sm text-slate-500 font-medium mb-2"
-                  >Card Holder Name</label
+                  >Name des Karteninhabers</label
                 >
                 <input
                   type="text"
-                  placeholder="John Doe"
+                  v-model="cardName"
+                  placeholder="Max Mustermann"
                   class="px-4 py-2.5 bg-transparent text-slate-900 w-full text-sm border border-gray-300 rounded-md focus:border-purple-500 outline-0"
                 />
+                <span class="text-red-500 text-sm">{{ errors.cardName }}</span>
               </div>
+
               <div>
-                <label class="block text-sm text-slate-500 font-medium mb-2">Card Number</label>
-                <div
-                  class="flex bg-transparent border border-gray-300 rounded-md focus-within:border-purple-500 overflow-hidden"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" class="w-6 ml-3" viewBox="0 0 32 20">
-                    <circle cx="10" cy="10" r="10" fill="#f93232" data-original="#f93232" />
-                    <path
-                      fill="#fed049"
-                      d="M22 0c-2.246 0-4.312.75-5.98 2H16v.014c-.396.298-.76.634-1.107.986h2.214c.308.313.592.648.855 1H14.03a9.932 9.932 0 0 0-.667 1h5.264c.188.324.365.654.518 1h-6.291a9.833 9.833 0 0 0-.377 1h7.044c.104.326.186.661.258 1h-7.563c-.067.328-.123.66-.157 1h7.881c.039.328.06.661.06 1h-8c0 .339.027.67.06 1h7.882c-.038.339-.093.672-.162 1h-7.563c.069.341.158.673.261 1h7.044a9.833 9.833 0 0 1-.377 1h-6.291c.151.344.321.678.509 1h5.264a9.783 9.783 0 0 1-.669 1H14.03c.266.352.553.687.862 1h2.215a10.05 10.05 0 0 1-1.107.986A9.937 9.937 0 0 0 22 20c5.523 0 10-4.478 10-10S27.523 0 22 0z"
-                      class="hovered-path"
-                      data-original="#fed049"
-                    />
-                  </svg>
-                  <input
-                    type="number"
-                    placeholder="xxxx xxxx xxxx"
-                    class="px-4 py-2.5 bg-transparent text-slate-900 w-full text-sm outline-0"
-                  />
-                </div>
+                <label class="block text-sm text-slate-500 font-medium mb-2">Kartennummer</label>
+                <input
+                  v-model="cardNumber"
+                  type="number"
+                  placeholder="xxxx xxxx xxxx"
+                  class="px-4 py-2.5 bg-transparent text-slate-900 w-full text-sm border border-gray-300 rounded-md focus:border-purple-500 outline-0"
+                />
+                <span class="text-red-500 text-sm">{{ errors.cardNumber }}</span>
               </div>
+
               <div class="grid grid-cols-2 gap-4">
                 <div>
-                  <label class="block text-sm text-slate-500 font-medium mb-2">Expiry Date</label>
+                  <label class="block text-sm text-slate-500 font-medium mb-2">Ablaufdatum</label>
                   <input
-                    type="number"
-                    placeholder="08/27"
+                    type="text"
+                    placeholder="08/2027"
+                    inputmode="numeric"
+                    maxlength="7"
+                    v-model="expiryInput"
                     class="px-4 py-2.5 bg-transparent text-slate-900 w-full text-sm border border-gray-300 rounded-md focus:border-purple-500 outline-0"
                   />
+                  <span class="text-red-500 text-sm">{{
+                    errors.expiryMonth || errors.expiryYear
+                  }}</span>
                 </div>
+
                 <div>
-                  <label class="block text-sm text-slate-500 font-medium mb-2">CVV</label>
+                  <label class="block text-sm text-slate-500 font-medium mb-2"
+                    >Sicherheitscode (CVV)</label
+                  >
                   <input
+                    v-model="cvv"
                     type="number"
                     placeholder="XXX"
                     class="px-4 py-2.5 bg-transparent text-slate-900 w-full text-sm border border-gray-300 rounded-md focus:border-purple-500 outline-0"
                   />
+                  <span class="text-red-500 text-sm">{{ errors.cvv }}</span>
                 </div>
               </div>
             </div>
-          </form>
 
-          <div class="w-full p-3">
-            <label for="type2" class="flex items-center cursor-pointer">
-              <input
-                type="radio"
-                class="form-radio h-5 w-5 text-indigo-500"
-                name="type"
-                id="type2"
-              />
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg"
-                width="80"
-                class="ml-3"
-              />
-            </label>
+            <button
+              type="submit"
+              class="block w-full max-w-xs mx-auto bg-indigo-700 hover:bg-indigo-500 focus:bg-indigo-500 text-white rounded-lg px-3 py-2 font-semibold mt-6"
+            >
+              <i class="mdi mdi-lock-outline mr-1"></i> JETZT BEZAHLEN
+            </button>
           </div>
-        </div>
-
-        <div>
-          <button
-            @click="onPayment"
-            class="block w-full max-w-xs mx-auto bg-indigo-700 hover:bg-indigo-500 focus:bg-indigo-500 text-white rounded-lg px-3 py-2 font-semibold"
-          >
-            <i class="mdi mdi-lock-outline mr-1"></i> JETZT BEZAHLEN
-          </button>
-        </div>
+        </form>
       </div>
     </div>
   </div>
@@ -299,20 +304,102 @@ module.exports = {
 </style>
 <script lang="ts" setup>
 import { useProductStore } from '@/modules/products/store/products.store';
-import { reactive, ref } from 'vue';
+import { computed, reactive, ref, watch } from 'vue';
 import { useToast } from 'vue-toastification';
 import { shopStore } from '../store/shop.store';
 import type { ContactInfo, PaymentInfo } from '../interfaces/order.interface';
-import { useRouter } from 'vue-router';
-import type { ProductItem } from '@/modules/products/interfaces/product.interface';
-import { useLocalStorage } from '@vueuse/core';
+import { useForm, useField } from 'vee-validate';
+import * as yup from 'yup';
+
+const schema = yup.object({
+  name: yup.string().required('Name ist erforderlich'),
+  address: yup.string().required('Adresse ist erforderlich'),
+  plz: yup
+    .string()
+    .required('PLZ ist erforderlich')
+    .matches(/^\d{5}$/, 'PLZ muss 5-stellig sein'),
+  city: yup.string().required('Stadt ist erforderlich'),
+
+  // Pago con tarjeta
+  type: yup.string().required('Bitte wählen Sie die Zahlungsart'),
+  cardName: yup.string().when('type', {
+    is: 'card',
+    then: (schema) => schema.required('Name des Karteninhabers ist erforderlich'),
+  }),
+  cardNumber: yup.string().when('type', {
+    is: 'card',
+    then: (schema) =>
+      schema
+        .required('Kartennummer ist erforderlich')
+        .matches(/^\d{16}$/, 'Kartennummer muss 16 Ziffern haben'),
+  }),
+  expiryMonth: yup.string().when('type', {
+    is: 'card',
+    then: (schema) =>
+      schema.required('Monat erforderlich').matches(/^(0[1-9]|1[0-2])$/, 'Ungültiger Monat'),
+  }),
+  expiryYear: yup.string().when('type', {
+    is: 'card',
+    then: (schema) => schema.required('Jahr erforderlich').matches(/^\d{4}$/, 'Ungültiges Jahr'),
+  }),
+  cvv: yup.string().when('type', {
+    is: 'card',
+    then: (schema) =>
+      schema.required('CVV erforderlich').matches(/^\d{3}$/, 'CVV muss 3 Ziffern haben'),
+  }),
+});
+const { handleSubmit, errors, values } = useForm({
+  validationSchema: schema,
+  initialValues: {
+    name: '',
+    address: '',
+    plz: '',
+    city: '',
+    type: '',
+    cardName: '',
+    cardNumber: '',
+    expiryMonth: '',
+    expiryYear: '',
+    cvv: '',
+  },
+});
+const { value: name } = useField<string>('name');
+const { value: address } = useField<string>('address');
+const { value: plz } = useField<string>('plz');
+const { value: city } = useField<string>('city');
+const { value: type } = useField<string>('type');
+const { value: cardName } = useField<string>('cardName');
+const { value: cardNumber } = useField<string>('cardNumber');
+const { value: cvv } = useField<string>('cvv');
 
 const productStore = useProductStore();
-const router = useRouter();
 const orderShopStore = shopStore();
 const toast = useToast();
-const loading = ref(false);
 
+const { value: expiryMonth } = useField<string>('expiryMonth');
+const { value: expiryYear } = useField<string>('expiryYear');
+
+const expiryInput = ref(''); // lo que ve el usuario
+
+watch(
+  () => expiryInput.value,
+  (val, oldVal) => {
+    const clean = val.replace(/\D/g, '');
+
+    expiryMonth.value = clean.slice(0, 2);
+    expiryYear.value = clean.slice(2, 6);
+
+    if (clean.length <= 2) {
+      expiryInput.value = clean;
+    } else if (clean.length <= 6) {
+      expiryInput.value = `${clean.slice(0, 2)}/${clean.slice(2)}`;
+    } else {
+      expiryInput.value = `${clean.slice(0, 2)}/${clean.slice(2, 6)}`;
+    }
+  },
+);
+
+console.log('sdfsdf');
 const contactForm = reactive({
   name: '',
   address: '',
@@ -327,8 +414,41 @@ const pymentForm = reactive({
   expiryYear: '',
   cvv: '',
 } as PaymentInfo);
+const onSubmit = handleSubmit(async () => {
+  contactForm.name = name.value;
+  contactForm.address = address.value;
+  contactForm.plz = plz.value;
+  contactForm.city = city.value;
 
-const onPayment = async () => {
+  pymentForm.type = type.value as 'card' | 'paypal';
+  pymentForm.cardName = cardName.value.toString();
+  pymentForm.cardNumber = cardNumber.value.toString();
+  pymentForm.expiryMonth = expiryMonth.value.toString();
+  pymentForm.expiryYear = expiryYear.value.toString();
+  pymentForm.cvv = cvv.value.toString();
+
+  const productsItems = productStore.productsCart.map((item) => ({
+    productId: item.product.id,
+    quantity: item.quantity,
+  }));
+
+  const { ok, message } = await orderShopStore.createOrderPayment(
+    productsItems,
+    contactForm,
+    pymentForm,
+  );
+
+  if (ok) {
+    localStorage.setItem('productsCart', '');
+    await orderShopStore.processFakePayment();
+    toast.success(message);
+    window.location.href = '/orders';
+  } else {
+    toast.error(message);
+  }
+});
+
+/* const onPayment = async () => {
   console.log(contactForm);
   console.log(pymentForm);
   const productsItems = productStore.productsCart.map((item) => {
@@ -343,6 +463,7 @@ const onPayment = async () => {
   if (ok) {
     console.log('sddfgdfg');
     localStorage.setItem('productsCart', ''); //Warenkorb aufräumen
+
     await orderShopStore.processFakePayment(); //Bezalung Simulieren
     toast.success(message);
     window.location.href = '/';
@@ -350,5 +471,5 @@ const onPayment = async () => {
   }
   toast.error(message);
   console.log(ok);
-};
+}; */
 </script>

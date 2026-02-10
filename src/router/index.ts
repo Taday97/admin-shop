@@ -1,5 +1,5 @@
-
 import { adminRoutes } from '@/modules/admin/routes';
+import isAuthenticatedGuard from '@/modules/auth/guards/is-authenticated.guard';
 import AuthLayout from '@/modules/auth/layouts/AuthLayout.vue';
 import { authRoutes } from '@/modules/auth/routes';
 import ShopLayout from '@/modules/shop/layout/ShopLayout.vue';
@@ -27,6 +27,7 @@ const router = createRouter({
           path: '/checkout',
           name: 'checkout',
           component: () => import('@/modules/shop/views/CheckoutView.vue'),
+          beforeEnter: isAuthenticatedGuard,
         },
         {
           path: '/orders',
@@ -38,9 +39,7 @@ const router = createRouter({
     // Auth Routers
     authRoutes,
     // Admin Routers
-    adminRoutes
-
-   
+    adminRoutes,
   ],
 });
 

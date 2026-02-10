@@ -4,6 +4,7 @@ import type {
   ProductItemCreate,
 } from '@/modules/products/interfaces/product.interface';
 import type { ContactInfo, Order, PaymentInfo } from '../interfaces/order.interface';
+import type { AxiosError } from 'axios';
 
 interface ResponseError {
   ok: false;
@@ -30,11 +31,11 @@ export const createOrderAction = async (
       ok: true,
       order: data.order,
     };
-  } catch (err) {
+  } catch (err:any) {
     console.log(err);
     return {
       ok: false,
-      message: 'Beim Bezahlen ist ein Fehler aufgetreten',
+      message: err.response.data.error,
     };
   }
 };

@@ -23,7 +23,8 @@
     "vue": "^3.5.27",
     "vue-router": "^5.0.1",
     "vue-toastification": "^2.0.0-rc.5",
-    "yop": "^0.0.0"
+    "yop": "^0.0.0",
+    "yup": "^1.7.1"
   },
   "devDependencies": {
     "@tsconfig/node24": "^24.0.4",
