@@ -28,6 +28,11 @@ const router = createRouter({
           name: 'checkout',
           component: () => import('@/modules/shop/views/CheckoutView.vue'),
         },
+        {
+          path: '/orders',
+          name: 'orders',
+          component: () => import('@/modules/shop/views/OrderSummary.vue'),
+        },
       ],
     },
     // Auth Routers

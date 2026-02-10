@@ -16,14 +16,10 @@
             <p class="text-gray-700">Zwischensumme</p>
             <p class="text-gray-700">{{ productStore.totalPrice.toFixed(2) }} €</p>
           </div>
-          <div class="flex justify-between">
-            <p class="text-gray-700">Versand</p>
-            <p class="text-gray-700">4.99 €</p>
-          </div>
           <hr class="my-4" />
           <div class="flex justify-between">
             <p class="text-lg font-bold">Gesamt</p>
-            <p class="text-lg font-bold">{{ (productStore.totalPrice + 4.99).toFixed(2) }} €</p>
+            <p class="text-lg font-bold">{{ (productStore.totalPrice).toFixed(2) }} €</p>
           </div>
 
           <div class="flex justify-between">

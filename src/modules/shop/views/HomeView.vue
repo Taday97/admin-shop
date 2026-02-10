@@ -57,6 +57,8 @@
     <ProductList v-else :products="produts"></ProductList>
     <ButtonPagination :has-more-data="!!produts && produts.length < 10" :page="page">
     </ButtonPagination>
+  <div id="#courses"></div>">
+
   </div>
 </template>
 

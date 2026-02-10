@@ -4,22 +4,22 @@
     <!-- Username Input -->
     <div class="mb-4">
       <label for="name" class="block text-gray-600">Benutzername</label>
-      <input ref="nameInputRef" v-model="myForm.name" type="text" id="name" name="name"
+      <input ref="nameInputRef" v-model="myForm.name" type="text" placeholder="Benutzernamen eingeben" id="name" name="name"
         class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
         autocomplete="off" />
     </div>
 
-    <!-- Username Input -->
+    <!-- Email Input -->
     <div class="mb-4">
       <label for="email" class="block text-gray-600">Email</label>
-      <input ref="emailInputRef" v-model="myForm.email" type="text" id="email" name="email"
+      <input ref="emailInputRef" v-model="myForm.email" type="text" id="email" name="email"  placeholder="E-Mail-Adresse eingeben"
         class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
         autocomplete="off" />
     </div>
     <!-- Password Input -->
     <div class="mb-4">
       <label for="password" class="block text-gray-600">Passwort</label>
-      <input ref="passwordInputRef" v-model="myForm.password" type="password" id="password" name="password"
+      <input ref="passwordInputRef" v-model="myForm.password" type="password" id="password" name="password" placeholder="Passwort eingeben"
         class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
         autocomplete="off" />
     </div>
