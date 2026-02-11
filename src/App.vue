@@ -1,4 +1,5 @@
 <template>
+
   <div>
     <FullScreenLoader v-if="authStore.isChecking" />
 

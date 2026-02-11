@@ -56,6 +56,7 @@ import { useAuthStore } from '../../auth/store/auth.store';
           </div>
         </RouterLink>
         <RouterLink
+          v-if="authStore.isAuthenticated"
           to="/orders"
           type="button"
           class="rounde mr-3 hidden border border-blue-700 py-1.5 px-6 text-center text-sm font-medium text-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-300 md:inline-block rounded-lg"

@@ -19,7 +19,7 @@
           <div
             class="mt-6 sm:mt-8 flex flex-col sm:flex-row gap-4 sm:justify-center lg:justify-start"
           >
-            <a
+           <!--  <a
               href="#courses"
               class="px-8 py-4 md:px-10 md:py-5 text-lg font-semibold text-white bg-indigo-600 rounded-md hover:bg-indigo-700 transition ease-in-out duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
@@ -31,7 +31,7 @@
               class="px-8 py-4 md:px-10 md:py-5 text-lg font-semibold text-indigo-600 bg-indigo-100 rounded-md hover:bg-indigo-200 transition ease-in-out duration-300"
             >
               Abos ansehen
-            </a>
+            </a> -->
           </div>
         </div>
 
