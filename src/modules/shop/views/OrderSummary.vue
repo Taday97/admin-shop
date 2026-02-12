@@ -1,7 +1,24 @@
 <template>
-  <div class="min-h-screen bg-gray-100 py-16">
-    <h1 class="mb-10 mt-5 text-center text-2xl font-bold">Bestellungen</h1>
+  <div class="pt-5 min-h-screen bg-gray-100">
     <div class="space-y-6 px-4 md:px-6 lg:px-0 max-w-3xl mx-auto">
+      <div
+        v-if="!orders || orders.length ==0"
+        class="flex flex-col items-center justify-center py-20 min-h-[400px] text-center"
+      >
+        <h1 class="text-2xl sm:text-3xl font-bold text-gray-700 mb-4">
+          Keine Bestellung verfügbar
+        </h1>
+        <p class="text-gray-500 mb-6">Sie haben noch keine Bestellungen getätigt.</p>
+        <RouterLink to="/">
+          <button
+            class="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors"
+          >
+            Jetzt einkaufen
+          </button>
+        </RouterLink>
+      </div>
+
+      <h1  v-show="!(!orders || orders.length ==0)" data-v-5cf00776="" class=" text-center text-2xl font-bold">Bestellungen</h1>
       <!-- Card Bestelung -->
       <div
         v-for="order in orders"
@@ -12,8 +29,9 @@
         <div class="flex flex-wrap justify-between gap-6">
           <div class="max-w-96">
             <div class="flex items-center gap-4">
-              <span class="text-[15px] font-semibold text-slate-600">Bestellung Nr. {{ order.id }}</span>
-            
+              <span class="text-[15px] font-semibold text-slate-600"
+                >Bestellung Nr. {{ order.id }}</span
+              >
             </div>
             <p class="text-slate-600 text-sm mt-3">Aufgegeben am {{ order.orderDate }}</p>
           </div>
@@ -39,7 +57,7 @@
                 :src="getProductImageAction(item.product.images[0]!)"
                 :alt="item.product.name"
                 class="w-full h-full object-cover"
-              /> 
+              />
             </div>
             <div>
               <p class="text-[15px] font-medium text-slate-900">{{ item.product.name }}</p>
@@ -47,27 +65,9 @@
             </div>
           </div>
         </div>
-
-<!--         <div class="mt-8 flex flex-wrap gap-4">
-          <button
-            class="px-4 py-2 bg-white border border-gray-300 rounded-md text-sm text-slate-900 font-medium cursor-pointer hover:bg-gray-50 transition flex items-center gap-2"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 511.999 511.999">
-              <path
-                d="M508.745 246.041c-4.574-6.257-113.557-153.206-252.748-153.206S7.818 239.784 3.249 246.035a16.896 16.896 0 0 0 0 19.923c4.569 6.257 113.557 153.206 252.748 153.206s248.174-146.95 252.748-153.201a16.875 16.875 0 0 0 0-19.922zM255.997 385.406c-102.529 0-191.33-97.533-217.617-129.418 26.253-31.913 114.868-129.395 217.617-129.395 102.524 0 191.319 97.516 217.617 129.418-26.253 31.912-114.868 129.395-217.617 129.395z"
-                data-original="#000000"
-              />
-              <path
-                d="M255.997 154.725c-55.842 0-101.275 45.433-101.275 101.275s45.433 101.275 101.275 101.275S357.272 311.842 357.272 256s-45.433-101.275-101.275-101.275zm0 168.791c-37.23 0-67.516-30.287-67.516-67.516s30.287-67.516 67.516-67.516 67.516 30.287 67.516 67.516-30.286 67.516-67.516 67.516z"
-                data-original="#000000"
-              />
-            </svg>
-            View Details
-          </button>
-        </div> -->
       </div>
     </div>
-    <ButtonPagination :has-more-data="!!orders && orders.length < 10" :page="page">
+    <ButtonPagination v-if="!orders" :has-more-data="!orders && orders!.length < 10" :page="page">
     </ButtonPagination>
   </div>
 </template>

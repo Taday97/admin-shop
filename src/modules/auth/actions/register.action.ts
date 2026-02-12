@@ -20,6 +20,7 @@ export const registerAction = async (name: string, email: string, password: stri
       password,
       name
     });
+    localStorage.setItem('productsCart', '');
     return {
       ok: true,
       user: data.user,

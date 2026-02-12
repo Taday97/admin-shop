@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-gray-100 py-16">
+  <div class="min-h-screen bg-gray-100 py-10">
     <section class="mt-12 sm:mt-6 lg:mt-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col lg:flex-row items-center gap-8 lg:gap-16 my-10">
         <!-- Text Section -->
@@ -18,21 +18,7 @@
           <!-- Buttons -->
           <div
             class="mt-6 sm:mt-8 flex flex-col sm:flex-row gap-4 sm:justify-center lg:justify-start"
-          >
-           <!--  <a
-              href="#courses"
-              class="px-8 py-4 md:px-10 md:py-5 text-lg font-semibold text-white bg-indigo-600 rounded-md hover:bg-indigo-700 transition ease-in-out duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
-              Kurse entdecken
-            </a>
-
-            <a
-              href="#abo"
-              class="px-8 py-4 md:px-10 md:py-5 text-lg font-semibold text-indigo-600 bg-indigo-100 rounded-md hover:bg-indigo-200 transition ease-in-out duration-300"
-            >
-              Abos ansehen
-            </a> -->
-          </div>
+          ></div>
         </div>
 
         <!-- Image Section -->
@@ -48,17 +34,34 @@
 
     <!-- Title -->
 
-    <div v-if="!produts" class="pt-50">
-      <h1 class="text-center h-[500x]">Loading Products</h1>
-      <p>Wait a moment, please!</p>
+    <div
+      v-if="!produts"
+      class="flex flex-col items-center justify-center py-20 min-h-[400px] text-center"
+    >
+      <h1 class="text-2xl sm:text-3xl font-bold text-gray-700 mb-4">Keine Produkte verfügbar</h1>
+      <p class="text-gray-500 mb-6">Wir laden die Produkte. Bitte einen Moment Geduld!</p>
+      <svg
+        class="w-16 h-16 text-gray-300 animate-spin"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <circle
+          class="opacity-25"
+          cx="12"
+          cy="12"
+          r="10"
+          stroke="currentColor"
+          stroke-width="4"
+        ></circle>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+      </svg>
     </div>
 
     <!-- Product List -->
     <ProductList v-else :products="produts"></ProductList>
     <ButtonPagination :has-more-data="!!produts && produts.length < 10" :page="page">
     </ButtonPagination>
-  <div id="#courses"></div>">
-
   </div>
 </template>
 

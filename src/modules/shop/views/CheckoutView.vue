@@ -1,6 +1,6 @@
 <template>
-  <div class="min-h-screen bg-gray-100 py-16">
-    <h1 class="mb-10 mt-5 text-center text-2xl font-bold">Kasse</h1>
+  <div class="min-h-screen bg-gray-100">
+    <h1 class="mb-10 pt-5 text-center text-2xl font-bold">Kasse</h1>
     <div class="px-4 md:px-6 lg:px-0 flex flex-col md:flex-row gap-8 justify-center">
       <!-- Left: Order Summary -->
       <div class="mt-6 h-full rounded-lg border bg-white p-6 shadow-md md:mt-0 md:w-1/3">
