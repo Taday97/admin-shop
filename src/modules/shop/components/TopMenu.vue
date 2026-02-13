@@ -131,23 +131,29 @@ import { useAuthStore } from '../../auth/store/auth.store';
               </p>
             </span>
           </span>
-          <RouterLink to="auth/login" v-if="!authStore.isAuthenticated">
+          <RouterLink to="auth/login" v-if="!authStore.isAuthenticated"  title="Anmeldung">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48">
+              <g
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="4"
+              >
+                <path d="M23.992 6H6v36h18" /> 
+                <path d="m25 33l-9-9l9-9m17 8.992H16" />
+              </g>
+            </svg>
+          </RouterLink>
+          <button @click="authStore.logout()" v-if="authStore.isAuthenticated" title="Abmeldung">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
               <path
                 fill="currentColor"
                 d="M12 21v-2h7V5h-7V3h7q.825 0 1.413.588T21 5v14q0 .825-.587 1.413T19 21zm-2-4l-1.375-1.45l2.55-2.55H3v-2h8.175l-2.55-2.55L10 7l5 5z"
               />
             </svg>
-          </RouterLink>
-          <button @click="authStore.logout()" v-if="authStore.isAuthenticated">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-              <path
-                fill="currentColor"
-                d="M5 21q-.825 0-1.412-.587T3 19V5q0-.825.588-1.412T5 3h7v2H5v14h7v2zm11-4l-1.375-1.45l2.55-2.55H9v-2h8.175l-2.55-2.55L16 7l5 5z"
-              />
-            </svg>
           </button>
-          <RouterLink to="auth/register" v-if="!authStore.isAuthenticated">
+          <RouterLink to="auth/register" v-if="!authStore.isAuthenticated" title="Register">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
               <path
                 fill="currentColor"
@@ -155,7 +161,7 @@ import { useAuthStore } from '../../auth/store/auth.store';
               />
             </svg>
           </RouterLink>
-          <button @click="toggleMenu" class="lg:hidden cursor-pointer">
+          <button @click="toggleMenu" class="lg:hidden cursor-pointer" >
             <svg class="w-7 h-7" fill="#000" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
               <path
                 fill-rule="evenodd"
