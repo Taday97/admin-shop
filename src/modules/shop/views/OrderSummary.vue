@@ -1,8 +1,8 @@
 <template>
   <div class="pt-5 min-h-screen bg-gray-100">
-    <div class="space-y-6 px-4 md:px-6 lg:px-0 max-w-3xl mx-auto">
+    <div class="space-y-6 px-4 md:px-6 lg:px-0 max-w-3xl mx-auto pb-5">
       <div
-        v-if="!orders || orders.length ==0"
+        v-if="!orders || orders.length == 0"
         class="flex flex-col items-center justify-center py-20 min-h-[400px] text-center"
       >
         <h1 class="text-2xl sm:text-3xl font-bold text-gray-700 mb-4">
@@ -18,7 +18,13 @@
         </RouterLink>
       </div>
 
-      <h1  v-show="!(!orders || orders.length ==0)" data-v-5cf00776="" class=" text-center text-2xl font-bold">Bestellungen</h1>
+      <h1
+        v-show="!(!orders || orders.length == 0)"
+        data-v-5cf00776=""
+        class="text-center text-2xl font-bold"
+      >
+        Bestellungen
+      </h1>
       <!-- Card Bestelung -->
       <div
         v-for="order in orders"
@@ -33,7 +39,7 @@
                 >Bestellung Nr. {{ order.id }}</span
               >
             </div>
-            <p class="text-slate-600 text-sm mt-3">Aufgegeben am {{ order.orderDate }}</p>
+            <p class="text-slate-600 text-sm mt-3">Aufgegeben am {{ date(order.orderDate) }}</p>
           </div>
           <div class="text-right">
             <p class="text-lg font-semibold text-slate-900">
@@ -67,8 +73,9 @@
         </div>
       </div>
     </div>
-    <ButtonPagination v-if="!orders" :has-more-data="!orders && orders!.length < 10" :page="page">
+    <ButtonPagination v-show="!!orders && orders!.length > 10" :has-more-data="!!orders && orders!.length < 10" :page="page">
     </ButtonPagination>
+
   </div>
 </template>
 <script lang="ts" setup>
@@ -102,4 +109,10 @@ watchEffect(() => {
     queryFn: () => getOrdersActions(page.value + 1),
   });
 });
+
+const date = (datum: Date) => {
+  const valueDate=new Date(datum.toString());
+  const date=new Date(valueDate.getFullYear(),valueDate.getMonth(),valueDate.getDay())
+  return date.toLocaleDateString('de-DE');
+};
 </script>
