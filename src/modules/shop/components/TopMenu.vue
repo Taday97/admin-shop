@@ -35,6 +35,7 @@ import { useAuthStore } from '../../auth/store/auth.store';
         </RouterLink>
 
         <div
+          @click="isMenuOpen = false"
           :class="['lg:flex lg:flex-1 lg:justify-end', isMenuOpen ? 'block' : 'hidden']"
           class="lg:!block max-lg:before:fixed max-lg:before:bg-black max-lg:before:opacity-50 max-lg:before:inset-0 max-lg:before:z-50"
         >
@@ -59,7 +60,7 @@ import { useAuthStore } from '../../auth/store/auth.store';
           </button>
 
           <ul
-            class="lg:flex lg:justify-end lg:gap-x-10 max-lg:space-y-3 max-lg:fixed max-lg:bg-white max-lg:w-1/2 max-lg:min-w-[300px] max-lg:top-0 max-lg:left-0 max-lg:p-6 max-lg:h-full max-lg:shadow-md max-lg:overflow-auto z-50"
+            class="lg:flex lg:mr-10 lg:justify-end lg:gap-x-5 max-lg:space-y-3 max-lg:fixed max-lg:bg-white max-lg:w-1/2 max-lg:min-w-[300px] max-lg:top-0 max-lg:left-0 max-lg:p-6 max-lg:h-full max-lg:shadow-md max-lg:overflow-auto z-50"
           >
             <li class="mb-6 hidden max-lg:block">
               <RouterLink to="/">
@@ -77,13 +78,28 @@ import { useAuthStore } from '../../auth/store/auth.store';
               </RouterLink>
             </li>
 
-            <li class="lg:ml-8 max-lg:border-b max-lg:border-gray-300 max-lg:py-3">
+            <li class="lg:ml-4 max-lg:border-b max-lg:border-gray-300 max-lg:py-3">
               <RouterLink
                 v-if="authStore.isAuthenticated"
+                :class="{
+                  'bg-indigo-100 text-indigo-700': $route.path === '/orders',
+                  'text-gray-600 hover:bg-indigo-100 hover:text-indigo-700':
+                    $route.path !== '/orders',
+                }"
                 to="/orders"
-                class="text-gray-600 text-[15px] font-semibold block underline"
+                class="block px-4 py-2 rounded-lg text-gray-600 text-[15px] font-semibold transition-all duration-200 ease-in-out hover:bg-indigo-100 hover:text-indigo-700"
               >
                 Bestellungen
+              </RouterLink>
+            </li>
+
+            <li class="lg:ml-4 max-lg:border-b max-lg:border-gray-300 max-lg:py-3">
+              <RouterLink
+                v-if="authStore.isAuthenticated && authStore.isAdmin"
+                to="/admin"
+                class="block px-4 py-2 rounded-lg text-gray-600 text-[15px] font-semibold transition-all duration-200 ease-in-out hover:bg-indigo-100 hover:text-indigo-700"
+              >
+                Administrator
               </RouterLink>
             </li>
           </ul>
@@ -131,7 +147,7 @@ import { useAuthStore } from '../../auth/store/auth.store';
               </p>
             </span>
           </span>
-          <RouterLink to="auth/login" v-if="!authStore.isAuthenticated"  title="Anmeldung">
+          <RouterLink to="auth/login" v-if="!authStore.isAuthenticated" title="Anmeldung">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48">
               <g
                 fill="none"
@@ -140,7 +156,7 @@ import { useAuthStore } from '../../auth/store/auth.store';
                 stroke-linejoin="round"
                 stroke-width="4"
               >
-                <path d="M23.992 6H6v36h18" /> 
+                <path d="M23.992 6H6v36h18" />
                 <path d="m25 33l-9-9l9-9m17 8.992H16" />
               </g>
             </svg>
@@ -161,7 +177,7 @@ import { useAuthStore } from '../../auth/store/auth.store';
               />
             </svg>
           </RouterLink>
-          <button @click="toggleMenu" class="lg:hidden cursor-pointer" >
+          <button @click="toggleMenu" class="lg:hidden cursor-pointer">
             <svg class="w-7 h-7" fill="#000" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
               <path
                 fill-rule="evenodd"

@@ -16,6 +16,6 @@ interface Prop {
     products: Product[]
 }
 
-defineProps<Prop>();
-
+const props = defineProps<Prop>();
+console.log("dssdf"+props.products)
 </script>

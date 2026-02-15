@@ -35,7 +35,7 @@
     <!-- Title -->
 
     <div
-      v-if="!produts"
+      v-if="!products"
       class="flex flex-col items-center justify-center py-20 min-h-[400px] text-center"
     >
       <h1 class="text-2xl sm:text-3xl font-bold text-gray-700 mb-4">Keine Produkte verfügbar</h1>
@@ -59,8 +59,8 @@
     </div>
 
     <!-- Product List -->
-    <ProductList v-else :products="produts"></ProductList>
-    <ButtonPagination :has-more-data="!!produts && produts.length < 10" :page="page">
+    <ProductList v-else :products="products"></ProductList>
+    <ButtonPagination :has-more-data="!!products && products.length < 10" :page="page">
     </ButtonPagination>
   </div>
 </template>
@@ -71,17 +71,29 @@ import { useQuery, useQueryClient } from '@tanstack/vue-query';
 import ProductList from '../../products/components/ProductList.vue';
 import ButtonPagination from '@/modules/common/components/ButtonPagination.vue';
 import { useRoute } from 'vue-router';
-import { ref, watch, watchEffect } from 'vue';
+import { computed, ref, watch, watchEffect } from 'vue';
+import type { ProductsResponse } from '@/modules/products/interfaces/product.interface';
+
+const columns = [
+  { key: 'Name', label: 'Name' },
+  { key: 'Price', label: 'Pries' },
+  { key: 'Stock', label: 'Bestand' },
+  { key: 'Categorie', label: 'Kategorie' },
+  { key: 'Description', label: 'Beschreibung' },
+];
 
 const route = useRoute();
 const page = ref(Number(route.query.page || 1));
 const queryClient = useQueryClient();
 console.log({ page });
 
-const { data: produts = [], isLoading } = useQuery({
+const { data: productsData, isLoading } =  useQuery<ProductsResponse>({
   queryKey: ['products', { page: page }], //cache for products page 1, in andere anruft,  benutz man das gleiche, dann macht mann keine anruft zu Api sondern nimmt die value von diese Cache
   queryFn: () => getProductsActions(page.value),
 });
+const products = computed(() => productsData.value?.data ?? []);
+const total = computed(() => productsData.value?.total ?? 0);
+
 
 watch(
   () => route.query.page,

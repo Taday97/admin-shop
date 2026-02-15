@@ -31,7 +31,7 @@
             class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
             autocomplete="off"
           />
-          <p v-if="errors.email" class="text-red-500 text-sm mt-1">{{ errors.password }}</p>
+          <p v-if="errors.password" class="text-red-500 text-sm mt-1">{{ errors.password }}</p>
           <!-- Ojo -->
           <button
             type="button"

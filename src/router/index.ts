@@ -33,6 +33,7 @@ const router = createRouter({
           path: '/orders',
           name: 'orders',
           component: () => import('@/modules/shop/views/OrderSummary.vue'),
+          beforeEnter:isAuthenticatedGuard
         },
       ],
     },

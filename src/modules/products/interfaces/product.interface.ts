@@ -23,5 +23,8 @@ export interface Category {
   name: string;
   description: string;
 }
-
+export interface ProductsResponse {
+  data: Product[];
+  total: number;
+}
 
